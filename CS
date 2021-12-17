@@ -1,0 +1,39 @@
+int myVolt=A1;
+int readVal;
+float V2;
+int dTime=250;
+int redLED=11;
+int yellowLED=10;
+int greenLED=6;
+int ON=HIGH;
+int OFF=LOW;
+
+
+void setup() {
+  // put your setup code here, to run once
+  Serial.begin(250000);
+  pinMode(redLED,OUTPUT);
+  pinMode(yellowLED,OUTPUT);
+  pinMode(greenLED,OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+readVal=analogRead(myVolt);
+V2=(5./1023.)*readVal;
+Serial.println(V2);
+delay(dTime);
+
+
+
+//Green light is staying lit after it passes threshole it just dims but doesnt turn off
+//same with yellow light 
+if (V2>=3) {  digitalWrite(redLED,ON);}
+if (V2<=3) {  digitalWrite(redLED,OFF);}
+if (V2>=2) {  digitalWrite(greenLED,ON);}
+if (V2>=3) {  digitalWrite(greenLED,OFF);}
+if (V2<=1.8) {  digitalWrite(greenLED,OFF);}
+if (V2>=2.9) {  digitalWrite(greenLED,OFF);}
+if (V2>=0.1)  {  digitalWrite(yellowLED,ON);}
+if (V2>=1.9) {  digitalWrite(yellowLED,OFF);}
+}
